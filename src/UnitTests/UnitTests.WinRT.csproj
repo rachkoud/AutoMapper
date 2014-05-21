@@ -152,7 +152,6 @@
     <Compile Include="BeforeAfterMapping.cs" />
     <Compile Include="BidirectionalRelationships.cs" />
     <Compile Include="Bug\AddingConfigurationForNonMatchingDestinationMemberBug.cs" />
-    <Compile Include="Bug\AllMembersNullSubstitute.cs" />
     <Compile Include="Bug\AllowNullDestinationValuesBugs.cs" />
     <Compile Include="Bug\AssignableCollectionBug.cs" />
     <Compile Include="Bug\AutoMapperInheritanceProblemDemo.cs" />

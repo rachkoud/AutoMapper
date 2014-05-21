@@ -56,15 +56,22 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\..\lib\xunit.net\xunit.dll</HintPath>
@@ -126,6 +133,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bug\SubclassMappings.cs" />
+    <Compile Include="Bug\SupportNullSubstituteInLinqExpressions.cs" />
     <Compile Include="CollectionMapping.cs" />
     <Compile Include="ConditionalMapping.cs" />
     <Compile Include="Constructors.cs" />
@@ -135,6 +143,51 @@
     <Compile Include="CustomMapping.cs" />
     <Compile Include="DataReaderMapping.cs">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bug\Data\Samples\EF5WithSelfTackingEntities\Destination.cs">
+      <DependentUpon>SampleModelWithSelfTrackingEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bug\Data\Samples\EF5WithSelfTackingEntities\SampleModelWithSelfTrackingEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleModelWithSelfTrackingEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bug\Data\Samples\EF5WithSelfTackingEntities\SampleModelWithSelfTrackingEntities.Context.Extensions.cs">
+      <DependentUpon>SampleModelWithSelfTrackingEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bug\Data\Samples\EF5WithSelfTackingEntities\SampleModelWithSelfTrackingEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleModelWithSelfTrackingEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bug\Data\Samples\EF5WithSelfTackingEntities\SampleModelWithSelfTrackingEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleModelWithSelfTrackingEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Bug\Data\Samples\EF5WithSelfTackingEntities\Source.cs">
+      <DependentUpon>SampleModelWithSelfTrackingEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bug\Data\Samples\EF5\Destination.cs">
+      <DependentUpon>SampleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bug\Data\Samples\EF5\SampleModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bug\Data\Samples\EF5\SampleModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bug\Data\Samples\EF5\SampleModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Bug\Data\Samples\EF5\Source.cs">
+      <DependentUpon>SampleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ExpressionBridge.cs" />
     <Compile Include="ExtensionMethods.cs" />
@@ -259,6 +312,38 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="ClassDiagram1.cd" />
+    <EntityDeploy Include="Bug\Data\Samples\EF5WithSelfTackingEntities\SampleModelWithSelfTrackingEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SampleModelWithSelfTrackingEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Bug\Data\Samples\EF5\SampleModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SampleModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Bug\Data\Samples\EF5WithSelfTackingEntities\SampleModelWithSelfTrackingEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SampleModelWithSelfTrackingEntities.Context.cs</LastGenOutput>
+      <DependentUpon>SampleModelWithSelfTrackingEntities.edmx</DependentUpon>
+    </None>
+    <None Include="Bug\Data\Samples\EF5WithSelfTackingEntities\SampleModelWithSelfTrackingEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SampleModelWithSelfTrackingEntities.cs</LastGenOutput>
+      <DependentUpon>SampleModelWithSelfTrackingEntities.edmx</DependentUpon>
+    </None>
+    <None Include="Bug\Data\Samples\EF5\SampleModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SampleModel.edmx</DependentUpon>
+      <LastGenOutput>SampleModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Bug\Data\Samples\EF5\SampleModel.edmx.diagram">
+      <DependentUpon>SampleModel.edmx</DependentUpon>
+    </None>
+    <None Include="Bug\Data\Samples\EF5\SampleModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SampleModel.edmx</DependentUpon>
+      <LastGenOutput>SampleModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
     <None Include="Should\Should.Core\Assertions\Assert.cs.orig" />
   </ItemGroup>
   <ItemGroup>
@@ -278,5 +363,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
